@@ -1,0 +1,29 @@
+<section *ngIf="isLoading" class="bg-dark py-5 vh-100 d-flex justify-content-center align-items-center">
+    <i class="fa-solid fa-spinner fa-spin-pulse text-info fs-1"></i>
+</section>
+<section *ngIf="!isLoading" class="bg-dark py-5">
+    
+    <div class="container">
+        <input [(ngModel)]="searchTerm" type="text" placeholder="Search" class="form-control mx-auto my-4 w-50">
+        <div  class="row g-3 text-center">
+            <div class="col-md-4" *ngFor="let maid of maids|search:searchTerm">
+                <div class="card py-3" [routerLink]="['/DetailedMaid',maid.id]">
+                    <img [src]="maid.avatar" class="card-img-top w-75 m-auto" alt="image">
+                    <div class="card-body">
+                      <h5 class="card-title">{{maid.first_name+' '+maid.last_name}}</h5>
+                      <p class="card-text"><span>Email: </span>{{maid.email}}</p>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class=" bg-dark d-flex justify-content-center">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" (click)="getMaids(1)">1</a></li>
+          <li class="page-item"><a class="page-link" (click)="getMaids(2)">2</a></li>
+        </ul>
+    </nav>
+</section>
